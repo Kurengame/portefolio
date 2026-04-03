@@ -1,0 +1,226 @@
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(-45deg, #0ff, #f0f, #1abc9c, rgb(149, 255, 0));
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+    color: white;
+    font-family: 'Orbitron', sans-serif;
+    text-align: center;
+  }
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+#fanlogo {
+  width: 500px; 
+  cursor: pointer;
+  transition: transform 3s linear;
+  margin-left: -200px;
+}
+
+.rotate-anticlockwise {
+  transform: rotate(-2160deg);
+}
+.logo-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+
+.satellite {
+  position: absolute;
+  width: 200px;  
+  opacity: 0;   
+  transition: opacity 1s ease;
+}
+
+.icon-cv         { top: -80px; left: -460px; cursor: pointer;}  
+.icon-entreprise { bottom: -80px; left: -460px; cursor: pointer;} 
+.icon-messites   { top: -80px; right: -300px; cursor: pointer;}  
+.icon-projets    { bottom: -80px; right: -300px; cursor: pointer;} 
+
+/* Classe active = visible */
+.show { opacity: 1; }
+
+/* Fond sombre */
+.modal {
+  display: none; /* caché par défaut */
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Contenu de la modale */
+.modal-content {
+  background: #111;
+  color: #fff;
+  width: 70%;        /* occupe 70% de l’écran */
+  max-height: 70%;   /* occupe max 70% hauteur */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px #00eaff;
+  overflow-y: auto;  /* scroll si contenu trop grand */
+  position: relative;
+}
+
+/* Bouton fermer */
+.close {
+  position: absolute;
+  top: 10px; right: 20px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #ff2bd4;
+}
+
+.close:hover { color: #fff; }
+
+.cv-card {
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+  color: #e9e9ff;
+}
+
+.cv-photo {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 50%;        
+  border: 3px solid #00eaff; 
+  box-shadow: 0 0 10px #00eaff;
+  margin-bottom: 15px;
+}
+
+.cv-card h2 {
+  margin: 5px 0;
+  color: #ffffff;
+  text-shadow: 0 0 6px #00eaff;
+}
+
+.cv-card p {
+  margin: 3px 0;
+  font-size: 26px;
+}
+
+.cv-card hr {
+  border: none;
+  border-top: 2px solid #ff2bd4;
+  width: 80%;
+  margin: 0 auto;
+  box-shadow: 0 0 6px #ff2bd4;
+}
+
+.cv-cols{
+  position:relative;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:28px;
+  text-align:left;
+  padding:8px 4px;
+  margin-top:6px;
+}
+/* séparateur vertical au milieu */
+.cv-cols::before{
+  content:"";
+  position:absolute; inset:0;
+  width:2px; margin:0 auto;
+  background: linear-gradient(#00eaff, #ff2bd4);
+  box-shadow: 0 0 8px #00eaff, 0 0 8px #ff2bd4;
+}
+
+/* Titres et listes */
+.cv-col h3{ color:#02d1ff; text-shadow:0 0 6px #ffffff8b; margin:0 0 10px; }
+.cv-col h4{ color:#00eaff; margin:12px 0 6px; }
+.cv-list{ margin:0; padding-left:18px; }
+.cv-list li{ margin:2px 0; }
+
+/* Soft skills en "chips" */
+.cv-chips{
+  list-style:none; padding:0; margin:4px 0 12px; display:flex; flex-wrap:wrap; gap:8px;
+}
+.cv-chips li{
+  padding:6px 10px; border:1px solid #00eaff;
+  border-radius:999px; box-shadow:0 0 6px #00eaff; background:rgba(0,234,255,0.08);
+}
+
+/* Petite note */
+.cv-note{ padding:10px; border-left:2px solid #ff94ea; background:rgba(255,43,212,.06); }
+
+/* Responsive : pile sur une colonne, on cache le séparateur */
+@media (max-width: 720px){
+  .cv-cols{ grid-template-columns:1fr; }
+  .cv-cols::before{ display:none; }
+}
+
+/* === Taille uniforme (30px) pour tout le texte des modales === */
+.modal .modal-content,
+.modal .modal-content *:not(h2):not(h3):not(h4) {
+  font-size: 25px !important;
+  line-height: 1.6 !important;
+}
+
+/* Titres (un peu plus grands, mais tu peux aussi les mettre à 30px si tu veux) */
+.modal .modal-content h2 { font-size: 42px !important; line-height: 1.2; }
+.modal .modal-content h3 { font-size: 34px !important; line-height: 1.25; }
+.modal .modal-content h4 { font-size: 30px !important; line-height: 1.3; }
+
+/* Spécifiques au bloc CV */
+.modal .cv-card,
+.modal .cv-card p,
+.modal .cv-list li,
+.modal .cv-note p { font-size: 25px !important; }
+
+.modal .cv-chips li { font-size: 25px !important; padding: 8px 14px; }
+
+/* Optionnel : un cran plus petit sur mobile */
+@media (max-width: 600px){
+  .modal .modal-content,
+  .modal .modal-content *:not(h2):not(h3):not(h4) { font-size: 22px !important; }
+  .modal .modal-content h2 { font-size: 32px !important; }
+  .modal .modal-content h3 { font-size: 26px !important; }
+  .modal .modal-content h4 { font-size: 22px !important; }
+}
+
+.site-button {
+  display: inline-block;
+  padding: 12px 25px;
+  font-size: 24px;
+  color: white;
+  background: linear-gradient(45deg, #00eaff, #ff2bd4);
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 0 10px #00eaff;
+  transition: transform 0.2s, box-shadow 0.2s;
+  margin-bottom: 20px ;
+}
+
+.site-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #ff2bd4;
+}
+
+.site-sep{
+  border: none;
+  border-top: 2px solid #ff2bd4;
+  width: 90%;
+  margin: 26px auto;
+  box-shadow: 0 0 10px #ff2bd4;
+}
+
+.jt-slogan{
+  text-align:center;
+  margin-top: 18px;
+}
+.jt-slogan span{
+  color:#00eaff;
+  text-shadow: 0 0 8px #00eaff;
+}
